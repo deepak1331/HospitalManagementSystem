@@ -16,9 +16,15 @@ spring:
 #JPA Configuration
   jpa:
     hibernate:
-      #ddl-auto can also be create-drop, create, create-only, truncate, drop, update
-      #In production we should keep only validate or none
       ddl-auto: update
     show-sql: true
     properties:
       hibernate.format-sql: true
+
+      #ddl-auto can also be create-drop, create, create-only, truncate, drop, update
+      #In production we should keep only
+      #Validate : validates and throws errors if discrepancy found between JPA/Entity and Database
+      #None : No changes are done to database even if JPA/Entity classes gets updated
+
+      #show-sql is true only in testing environment, mostly false in prod
+      #format-sql - prints query in new line for select/update/where clauses to increase readability
