@@ -1,9 +1,6 @@
 package com.learn.jpa.HospitalManagementSystem.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -16,13 +13,17 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 50, nullable = false)
     private String name;
 
     private LocalDate birthDate;
 
+    @Column(length = 6, nullable = false)
     private String gender;
 
+    @Column(length = 50, nullable = false)
     private String email;
 
+    @Column(length = 15, nullable = false)
     private String phoneNo;
 }
