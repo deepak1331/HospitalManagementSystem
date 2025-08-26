@@ -5,13 +5,19 @@ spring:
   application:
     name: HospitalManagementSystem
 
+#DB Configuration
   datasource:
-    url: jdbc:postgresql://localhost:5432/hms
+    #useSSL=false - its tells not to use SSL (optional to add when false)
+    #useSSL=true - its tells to use SSL (Secured connection, it is usually done in PROD )
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=hms&useSSL=false
     username: postgres
     password: postgres
 
+#JPA Configuration
   jpa:
     hibernate:
+      #ddl-auto can also be create-drop, create, create-only, truncate, drop, update
+      #In production we should keep only validate or none
       ddl-auto: update
     show-sql: true
     properties:
