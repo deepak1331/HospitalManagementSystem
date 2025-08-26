@@ -1,0 +1,18 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: HospitalManagementSystem
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hms
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format-sql: true
