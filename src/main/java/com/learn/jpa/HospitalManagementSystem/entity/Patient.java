@@ -1,12 +1,15 @@
 package com.learn.jpa.HospitalManagementSystem.entity;
 
+import com.learn.jpa.HospitalManagementSystem.constant.BloodGroupType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -17,7 +20,7 @@ import java.time.LocalDate;
 @Table(name = "patient_tbl",
         uniqueConstraints = {
                 @UniqueConstraint(name = "unique_email", columnNames = {"email"}),
-                @UniqueConstraint(name = "unique_name_dob", columnNames = {"name", "birthDate"})
+                @UniqueConstraint(name = "unique_name_dob", columnNames = {"patient_name", "birthDate"})
         },
         indexes = {
                 @Index(name = "idx_birthDate", columnList = "birthDate")
@@ -29,7 +32,7 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 50, nullable = false)
+    @Column(name = "patient_name", length = 50, nullable = false)
     private String name;
 
     private LocalDate birthDate;
@@ -42,4 +45,10 @@ public class Patient {
 
     @Column(length = 15, nullable = false)
     private String phoneNo;
+
+    private String bloodGroup;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdOn;
 }

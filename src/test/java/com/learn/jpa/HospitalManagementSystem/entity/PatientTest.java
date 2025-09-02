@@ -1,5 +1,6 @@
 package com.learn.jpa.HospitalManagementSystem.entity;
 
+import com.learn.jpa.HospitalManagementSystem.constant.BloodGroupType;
 import com.learn.jpa.HospitalManagementSystem.constant.Gender;
 import com.learn.jpa.HospitalManagementSystem.repo.PatientRepository;
 import com.learn.jpa.HospitalManagementSystem.service.PatientService;
@@ -22,15 +23,17 @@ public class PatientTest {
 
     @Test
     public void testAddPatient() {
-        LocalDate dob = LocalDate.of(1988, 5, 13);
+        LocalDate dob = LocalDate.of(1991, 9, 8);
         //Patient patient = new Patient(1L, "Deepak Yadav", dob, "Male",
         //                      "deepakyadav1331@gmail.com", "7777788888");
         Patient patient = Patient.builder()
-                .name("Deepak Yadav")
+                .name("Shubham Yadav")
                 .birthDate(dob)
                 .gender(Gender.Male.toString())
-                .email("deepakyadav1331@gmail.com")
-                .phoneNo("7777788888").build();
+                .email("shubhamyadav123@gmail.com")
+                .phoneNo("772343243")
+                .bloodGroup(String.valueOf(BloodGroupType.A_POSITIVE))
+                .build();
 
         Patient result = patientRepository.save(patient);
         System.out.printf("Patient Saved: %s", result);
@@ -39,24 +42,36 @@ public class PatientTest {
 
     @Test
     public void testAddAllPatient() {
-        LocalDate dob = LocalDate.of(1989, 9 ,3);
         //Patient patient = new Patient(1L, "Deepak Yadav", dob, "Male",
         //                      "deepakyadav1331@gmail.com", "7777788888");
         Patient patient = Patient.builder()
+                .name("Deepak Yadav")
+                .birthDate(LocalDate.of(1988, 6 ,13))
+                .gender(Gender.Male.toString())
+                .email("deepakyadav1331@gmail.com")
+                .phoneNo("7401087950")
+                .bloodGroup(BloodGroupType.AB_POSITIVE.getType())
+                .build();
+
+        Patient patient1 = Patient.builder()
                 .name("Shipra Yadav")
-                .birthDate(dob)
+                .birthDate(LocalDate.of(1989, 9 ,3))
                 .gender(Gender.Female.name())
                 .email("shiprayadav@gmail.com")
-                .phoneNo("7776688888").build();
+                .phoneNo("7776688888")
+                .bloodGroup(BloodGroupType.O_NEGATIVE.getType())
+                .build();
         
         Patient patient2 = Patient.builder()
                 .name("Avyaan Yadav")
                 .birthDate(LocalDate.of(2021, 12 ,20))
                 .gender(Gender.Male.toString())
                 .email("avyaanyadav@gmail.com")
-                .phoneNo("7776688888").build();
+                .phoneNo("7776688123")
+                .bloodGroup(BloodGroupType.B_POSITIVE.toString())
+                .build();
 
-        List<Patient> result = patientRepository.saveAll(List.of(patient, patient2));
+        List<Patient> result = patientRepository.saveAll(List.of(patient,patient1, patient2));
         System.out.printf("Patient Saved: %s", result);
         Assert.notNull(patient, "Not null");
     }
@@ -73,10 +88,10 @@ public class PatientTest {
 
     @Test
     public void testFindAllPatientId() {
-        Long patientId = 8L;
-        Patient patient = patientService.getPatientById(patientId);
+        Long patientId = 3L;
+        Patient patient;
+        patient = patientService.getPatientById(patientId);
 
         System.out.printf("Patient with ID: %d Output: %s", patientId, patient);
-
     }
 }
