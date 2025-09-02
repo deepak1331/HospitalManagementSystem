@@ -1,6 +1,7 @@
 package com.learn.jpa.HospitalManagementSystem.entity;
 
 import com.learn.jpa.HospitalManagementSystem.constant.BloodGroupType;
+import com.learn.jpa.HospitalManagementSystem.constant.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,8 +38,10 @@ public class Patient {
 
     private LocalDate birthDate;
 
-    @Column(length = 6, nullable = false)
-    private String gender;
+//    @Column(length = 6, nullable = false)
+//    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Column(length = 50, nullable = false, unique = true)
     private String email;

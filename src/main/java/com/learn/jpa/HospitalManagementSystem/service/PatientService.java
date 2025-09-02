@@ -21,4 +21,8 @@ public class PatientService {
         return p2;
     }
 
+    public Patient findByName(String patientName) {
+      return patientRepository.findByName(patientName);
+
+    }
 }

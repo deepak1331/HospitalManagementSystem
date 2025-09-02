@@ -29,7 +29,7 @@ public class PatientTest {
         Patient patient = Patient.builder()
                 .name("Shubham Yadav")
                 .birthDate(dob)
-                .gender(Gender.Male.toString())
+                .gender(Gender.Male)
                 .email("shubhamyadav123@gmail.com")
                 .phoneNo("772343243")
                 .bloodGroup(BloodGroupType.A_POSITIVE)
@@ -46,8 +46,8 @@ public class PatientTest {
         //                      "deepakyadav1331@gmail.com", "7777788888");
         Patient patient = Patient.builder()
                 .name("Deepak Yadav")
-                .birthDate(LocalDate.of(1988, 6 ,13))
-                .gender(Gender.Male.toString())
+                .birthDate(LocalDate.of(1988, 6, 13))
+                .gender(Gender.Male)
                 .email("deepakyadav1331@gmail.com")
                 .phoneNo("7401087950")
                 .bloodGroup(BloodGroupType.AB_POSITIVE)
@@ -55,23 +55,23 @@ public class PatientTest {
 
         Patient patient1 = Patient.builder()
                 .name("Shipra Yadav")
-                .birthDate(LocalDate.of(1989, 9 ,3))
-                .gender(Gender.Female.name())
+                .birthDate(LocalDate.of(1989, 9, 3))
+                .gender(Gender.Female)
                 .email("shiprayadav@gmail.com")
                 .phoneNo("7776688888")
                 .bloodGroup(BloodGroupType.O_NEGATIVE)
                 .build();
-        
+
         Patient patient2 = Patient.builder()
                 .name("Avyaan Yadav")
-                .birthDate(LocalDate.of(2021, 12 ,20))
-                .gender(Gender.Male.toString())
+                .birthDate(LocalDate.of(2021, 12, 20))
+                .gender(Gender.Male)
                 .email("avyaanyadav@gmail.com")
                 .phoneNo("7776688123")
                 .bloodGroup(BloodGroupType.B_POSITIVE)
                 .build();
 
-        List<Patient> result = patientRepository.saveAll(List.of(patient,patient1, patient2));
+        List<Patient> result = patientRepository.saveAll(List.of(patient, patient1, patient2));
         System.out.printf("Patient Saved: %s", result);
         Assert.notNull(patient, "Not null");
     }
@@ -93,5 +93,21 @@ public class PatientTest {
         patient = patientService.getPatientById(patientId);
 
         System.out.printf("Patient with ID: %d Output: %s", patientId, patient);
+    }
+
+    @Test
+    public void testFindByName() {
+        String patientName = "Deepak Yadav";
+        Patient patient;
+        patient = patientService.findByName(patientName);
+        System.out.printf("PatientName: %s Output: %s", patientName, patient);
+    }
+
+    @Test
+    public void testFindByGender() {
+        Gender gender = Gender.Male;
+        List<Patient> result = patientRepository.findByGender(gender);
+        System.out.printf("For Gender: %s No. of matching Patients : %d \n", gender, result.size());
+        result.forEach(System.out::println);
     }
 }
