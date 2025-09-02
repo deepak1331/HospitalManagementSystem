@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 
 @Table(name = "patient_tbl",
         uniqueConstraints = {
-                @UniqueConstraint(name = "unique_email", columnNames = {"email"}),
+                //@UniqueConstraint(name = "unique_email", columnNames = {"email"}),
                 @UniqueConstraint(name = "unique_name_dob", columnNames = {"patient_name", "birthDate"})
         },
         indexes = {
@@ -40,12 +40,13 @@ public class Patient {
     @Column(length = 6, nullable = false)
     private String gender;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = false, unique = true)
     private String email;
 
     @Column(length = 15, nullable = false)
     private String phoneNo;
 
+    @Column(length = 3)
     private String bloodGroup;
 
     @CreationTimestamp
