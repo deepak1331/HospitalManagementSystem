@@ -13,6 +13,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
+@Table(name = "patient_tbl",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "unique_email", columnNames = {"email"}),
+                @UniqueConstraint(name = "unique_name_dob", columnNames = {"name", "birthDate"})
+        },
+        indexes = {
+                @Index(name = "idx_birthDate", columnList = "birthDate")
+        }
+)
 public class Patient {
 
     @Id
