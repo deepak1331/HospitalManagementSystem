@@ -20,6 +20,13 @@ spring:
     show-sql: true
     properties:
       hibernate.format-sql: true
+#    defer-datasource-initialization: true
+
+#  sql:
+#    init:
+#      mode: ALWAYS
+#      data-locations:
+#        - 'classpath:patientData.sql'
 
       #ddl-auto can also be create-drop, create, create-only, truncate, drop, update
       #In production we should keep only
