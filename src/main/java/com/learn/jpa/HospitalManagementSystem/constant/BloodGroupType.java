@@ -18,12 +18,12 @@ public enum BloodGroupType {
         this.type = type;
     }
 
-    public String getType(){
-        return type;
-    }
+//    public String getType() {
+//        return type;
+//    }
 
     @Override
-    public String toString(){
+    public String toString() {
         return type;
     }
 }

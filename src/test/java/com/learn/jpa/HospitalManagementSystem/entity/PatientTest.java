@@ -32,7 +32,7 @@ public class PatientTest {
                 .gender(Gender.Male.toString())
                 .email("shubhamyadav123@gmail.com")
                 .phoneNo("772343243")
-                .bloodGroup(String.valueOf(BloodGroupType.A_POSITIVE))
+                .bloodGroup(BloodGroupType.A_POSITIVE)
                 .build();
 
         Patient result = patientRepository.save(patient);
@@ -50,7 +50,7 @@ public class PatientTest {
                 .gender(Gender.Male.toString())
                 .email("deepakyadav1331@gmail.com")
                 .phoneNo("7401087950")
-                .bloodGroup(BloodGroupType.AB_POSITIVE.getType())
+                .bloodGroup(BloodGroupType.AB_POSITIVE)
                 .build();
 
         Patient patient1 = Patient.builder()
@@ -59,7 +59,7 @@ public class PatientTest {
                 .gender(Gender.Female.name())
                 .email("shiprayadav@gmail.com")
                 .phoneNo("7776688888")
-                .bloodGroup(BloodGroupType.O_NEGATIVE.getType())
+                .bloodGroup(BloodGroupType.O_NEGATIVE)
                 .build();
         
         Patient patient2 = Patient.builder()
@@ -68,7 +68,7 @@ public class PatientTest {
                 .gender(Gender.Male.toString())
                 .email("avyaanyadav@gmail.com")
                 .phoneNo("7776688123")
-                .bloodGroup(BloodGroupType.B_POSITIVE.toString())
+                .bloodGroup(BloodGroupType.B_POSITIVE)
                 .build();
 
         List<Patient> result = patientRepository.saveAll(List.of(patient,patient1, patient2));

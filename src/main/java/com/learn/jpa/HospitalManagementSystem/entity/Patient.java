@@ -46,8 +46,11 @@ public class Patient {
     @Column(length = 15, nullable = false)
     private String phoneNo;
 
-    @Column(length = 3)
-    private String bloodGroup;
+//    @Column(length = 3)
+//    private String bloodGroup;
+
+    @Enumerated(EnumType.ORDINAL)
+    private BloodGroupType bloodGroup;
 
     @CreationTimestamp
     @Column(updatable = false)
