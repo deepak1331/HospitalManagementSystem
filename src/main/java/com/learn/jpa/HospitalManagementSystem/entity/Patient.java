@@ -9,12 +9,14 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Data
+
 @Entity
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-
 @Table(name = "patient_tbl",
         uniqueConstraints = {
                 //@UniqueConstraint(name = "unique_email", columnNames = {"email"}),
@@ -37,6 +39,7 @@ public class Patient {
 
 //    @Column(length = 6, nullable = false)
 //    private String gender;
+
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
@@ -56,4 +59,9 @@ public class Patient {
     @Column(updatable = false)
     @ToString.Exclude
     private LocalDateTime createdOn;
+
+
+    @OneToOne
+    @JoinColumn(name = "patient_insurance_id") //Owning Side
+    private Insurance insurance;
 }
