@@ -1,17 +1,65 @@
 package com.learn.jpa.HospitalManagementSystem.repo;
 
+import com.learn.jpa.HospitalManagementSystem.constant.BloodGroupType;
 import com.learn.jpa.HospitalManagementSystem.constant.Gender;
+import com.learn.jpa.HospitalManagementSystem.dto.BloodGroupCountResponseDTO;
 import com.learn.jpa.HospitalManagementSystem.entity.Patient;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
     Patient findByName(String patientName);
+
     Patient findByBirthDate(LocalDate dob);
+
     Patient findByBirthDateOrEmail(LocalDate dob, String email);
+
+    Optional<Patient> findByBirthDateAndEmail(LocalDate dob, String email);
+
     List<Patient> findByGender(Gender type);
+
+    List<Patient> findByEmailOrBloodGroup(String email, BloodGroupType type);
+
+    List<Patient> findByNameNotNull();
+
+    List<Patient> findByNameIsNull();
+
+    List<Patient> findByBirthDateBetween(LocalDate startDate, LocalDate endDate);
+
+
+    @Query("SELECT p FROM Patient p where p.bloodGroup = ?1")
+    List<Patient> findByBloodGroup(@Param("bloodGroup") BloodGroupType bloodGroup);
+
+    @Query("SELECT p FROM Patient p where p.phoneNo = :phoneNo")
+    List<Patient> findByMobileNumber(@Param("phoneNo") String phoneNo);
+
+    @Query("SELECT p.bloodGroup, count(*) as count FROM Patient p group by p.bloodGroup")
+    //List<Object[]> findCountByBloodGroupCount(@Param("bloodGroup") String bloodGroup);
+    List<Object[]> findCountByBloodGroup();
+
+    @Query("SELECT new com.learn.jpa.HospitalManagementSystem.dto.BloodGroupCountResponseDTO(p.bloodGroup, count(*))" +
+            " FROM Patient p group by p.bloodGroup")
+    List<BloodGroupCountResponseDTO> findCountByBloodGroup2();
+
+    //native Query
+    @Query(value = "SELECT * FROM patient_tbl", nativeQuery = true)
+    Patient findPatientById(@Param("id") Long id);
+
+    @Query(value = "SELECT * FROM patient_tbl p where p.gender = :gender", nativeQuery = true)
+    List<Patient> findPatientByGender(@Param("gender") String gender);
+
+
+    @Transactional
+    @Modifying
+    @Query("Update Patient p SET p.name = :name where p.id = :id")
+    int updateNameById(@Param("name") String name,@Param("id") Long id);
 }

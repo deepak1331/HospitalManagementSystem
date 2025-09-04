@@ -27,11 +27,11 @@ public class PatientTest {
         //Patient patient = new Patient(1L, "Deepak Yadav", dob, "Male",
         //                      "deepakyadav1331@gmail.com", "7777788888");
         Patient patient = Patient.builder()
-                .name("Shubham Yadav")
+                .name("Shikha Yadav")
                 .birthDate(dob)
-                .gender(Gender.Male)
-                .email("shubhamyadav123@gmail.com")
-                .phoneNo("772343243")
+                .gender(Gender.Female)
+                .email("shikhayadav123@gmail.com")
+                .phoneNo("792343243")
                 .bloodGroup(BloodGroupType.A_POSITIVE)
                 .build();
 
@@ -78,9 +78,6 @@ public class PatientTest {
 
     @Test
     public void testFindAllPatient() {
-//        Pageable pageable = Pageable.ofSize(5);
-//        Page<Patient> result2 = repository.findAll(pageable);
-
         List<Patient> result = patientRepository.findAll();
         System.out.printf("No. of Patient : %d\n", result.size());
         result.forEach(System.out::println);
@@ -105,9 +102,72 @@ public class PatientTest {
 
     @Test
     public void testFindByGender() {
-        Gender gender = Gender.Male;
+        Gender gender = Gender.Female;
         List<Patient> result = patientRepository.findByGender(gender);
         System.out.printf("For Gender: %s No. of matching Patients : %d \n", gender, result.size());
         result.forEach(System.out::println);
+    }
+
+    @Test
+    public void testFindByEmailOrBloodGroup() {
+        BloodGroupType bloodGroup = BloodGroupType.O_NEGATIVE;
+        String email = "deepakyadav1331@gmail.com";
+        List<Patient> result = patientRepository.findByEmailOrBloodGroup(email, bloodGroup);
+        System.out.printf("For BloodGroup: %s OR Email: %s No. of matching Patients : %d \n", bloodGroup, email, result.size());
+        result.forEach(System.out::println);
+    }
+
+    @Test
+    public void testFindByBirthDateBetween() {
+        LocalDate startDate = LocalDate.of(1990, 1, 1);
+        LocalDate endDate = LocalDate.of(1994, 12, 31);
+        List<Patient> result = patientRepository.findByBirthDateBetween(startDate, endDate);
+        System.out.printf("For Birthdate Between: %s and  %s \nNo. of matching Patients : %d \n", startDate, endDate, result.size());
+        result.forEach(System.out::println);
+    }
+
+    @Test
+    public void testFindByMobileNumber() {
+        String mobileNumber = "772343243";
+        List<Patient> result = patientRepository.findByMobileNumber(mobileNumber);
+        System.out.printf("For MobileNumber: %s \nNo. of matching Patients : %d \n", mobileNumber, result.size());
+        result.forEach(System.out::println);
+    }
+
+
+    @Test
+    public void testFindByBloodGroup() {
+        BloodGroupType bloodGroupType = BloodGroupType.AB_POSITIVE;
+        List<Patient> result = patientRepository.findByBloodGroup(bloodGroupType);
+        System.out.printf("For BloodGroupType: %s \nNo. of matching Patients : %d \n", bloodGroupType, result.size());
+        result.forEach(System.out::println);
+    }
+
+    @Test
+    public void testFindCountByBloodGroup() {
+        List<Object[]> result = patientRepository.findCountByBloodGroup();
+        result.forEach(s -> {
+            System.out.println(s[0] + " : " + s[1]);
+        });
+    }
+
+    @Test
+    public void testFindCountByBloodGroup2() {
+        patientRepository.findCountByBloodGroup2().forEach(System.out::println);
+    }
+
+    @Test
+    public void testFindPatientById() {
+        System.out.println("Find by Id = 3. Result : " + patientRepository.findPatientById(3L));
+    }
+
+    @Test
+    public void testUpdateNameById() {
+        System.out.println("Update Name where ID: 5. Column Updated Count: " + patientRepository.updateNameById("Gunjan", 8L));
+    }
+
+    @Test
+    public void testFindPatientByGender() {
+        patientRepository.findPatientByGender(Gender.Female.toString()).forEach(System.out::println);
     }
 }
