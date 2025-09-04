@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 public class Appointment {
 
     @Id

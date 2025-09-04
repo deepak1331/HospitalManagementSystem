@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -16,7 +17,6 @@ import java.time.LocalDateTime;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "patient_tbl",
         uniqueConstraints = {
                 //@UniqueConstraint(name = "unique_email", columnNames = {"email"}),
@@ -64,4 +64,7 @@ public class Patient {
     @OneToOne
     @JoinColumn(name = "patient_insurance_id") //Owning Side
     private Insurance insurance;
+
+    @OneToMany(mappedBy = "patient")
+    private List<Appointment> appointments;
 }
