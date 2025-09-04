@@ -7,6 +7,9 @@ import com.learn.jpa.HospitalManagementSystem.service.PatientService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
@@ -169,5 +172,28 @@ public class PatientTest {
     @Test
     public void testFindPatientByGender() {
         patientRepository.findPatientByGender(Gender.Female.toString()).forEach(System.out::println);
+    }
+
+    @Test
+    public void testFindPatientByPage() {
+        patientRepository.findPatientByPage(PageRequest.of(0, 2))
+                .forEach(System.out::println);
+    }
+
+    /**
+     * Pageable sortedByName = PageRequest.of(0, 3, Sort.by("name"));
+     *
+     * Pageable sortedByPriceDesc =  PageRequest.of(0, 3, Sort.by("price").descending());
+     *
+     * Pageable sortedByPriceDescNameAsc =
+     * PageRequest.of(0, 5, Sort.by("price").descending().and(Sort.by("name")));
+     */
+    @Test
+    public void testFindPatientByPageable() {
+        Page<Patient> response = patientRepository.findPatientByPageable(PageRequest.of(0,3,
+                Sort.by("birth_date").descending()));
+
+        System.out.println(response);
+        response.forEach(System.out::println);
     }
 }

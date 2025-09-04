@@ -5,6 +5,8 @@ import com.learn.jpa.HospitalManagementSystem.constant.Gender;
 import com.learn.jpa.HospitalManagementSystem.dto.BloodGroupCountResponseDTO;
 import com.learn.jpa.HospitalManagementSystem.entity.Patient;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -51,7 +53,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     List<BloodGroupCountResponseDTO> findCountByBloodGroup2();
 
     //native Query
-    @Query(value = "SELECT * FROM patient_tbl", nativeQuery = true)
+    @Query(value = "SELECT * FROM patient_tbl p where p.id = :id", nativeQuery = true)
     Patient findPatientById(@Param("id") Long id);
 
     @Query(value = "SELECT * FROM patient_tbl p where p.gender = :gender", nativeQuery = true)
@@ -62,4 +64,14 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     @Modifying
     @Query("Update Patient p SET p.name = :name where p.id = :id")
     int updateNameById(@Param("name") String name,@Param("id") Long id);
+
+
+    //******** Pagination ********//
+    @Query(value = "SELECT * FROM patient_tbl", nativeQuery = true)
+    List<Patient> findPatientByPage(Pageable pageable);
+
+    @Query(value = "SELECT * FROM patient_tbl", nativeQuery = true)
+    Page<Patient> findPatientByPageable(Pageable pageable);
+
+
 }
