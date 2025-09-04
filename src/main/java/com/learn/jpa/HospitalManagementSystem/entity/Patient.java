@@ -3,10 +3,7 @@ package com.learn.jpa.HospitalManagementSystem.entity;
 import com.learn.jpa.HospitalManagementSystem.constant.BloodGroupType;
 import com.learn.jpa.HospitalManagementSystem.constant.Gender;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -57,5 +54,6 @@ public class Patient {
 
     @CreationTimestamp
     @Column(updatable = false)
+    @ToString.Exclude
     private LocalDateTime createdOn;
 }
