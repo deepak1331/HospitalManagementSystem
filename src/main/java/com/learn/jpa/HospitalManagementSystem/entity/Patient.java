@@ -37,9 +37,6 @@ public class Patient {
 
     private LocalDate birthDate;
 
-//    @Column(length = 6, nullable = false)
-//    private String gender;
-
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
@@ -48,18 +45,14 @@ public class Patient {
 
     @Column(length = 15, nullable = false)
     private String phoneNo;
-
+    
+//    @Column(length = 6, nullable = false)
+//    private String gender;
 //    @Column(length = 3)
 //    private String bloodGroup;
 
     @Enumerated(EnumType.ORDINAL)
     private BloodGroupType bloodGroup;
-
-    @CreationTimestamp
-    @Column(updatable = false)
-    @ToString.Exclude
-    private LocalDateTime createdOn;
-
 
     @OneToOne
     @JoinColumn(name = "patient_insurance_id") //Owning Side
@@ -67,4 +60,9 @@ public class Patient {
 
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointments;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    @ToString.Exclude
+    private LocalDateTime createdOn;
 }
