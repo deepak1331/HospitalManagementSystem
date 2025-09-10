@@ -54,7 +54,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     //native Query
     @Query(value = "SELECT * FROM patient_tbl p where p.id = :id", nativeQuery = true)
-    Patient findPatientById(@Param("id") Long id);
+    Optional<Patient> findPatientById(@Param("id") Long id);
 
     @Query(value = "SELECT * FROM patient_tbl p where p.gender = :gender", nativeQuery = true)
     List<Patient> findPatientByGender(@Param("gender") String gender);

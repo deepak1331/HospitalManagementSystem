@@ -1,7 +1,8 @@
-package com.learn.jpa.HospitalManagementSystem.entity;
+package com.learn.jpa.HospitalManagementSystem;
 
 import com.learn.jpa.HospitalManagementSystem.constant.BloodGroupType;
 import com.learn.jpa.HospitalManagementSystem.constant.Gender;
+import com.learn.jpa.HospitalManagementSystem.entity.Patient;
 import com.learn.jpa.HospitalManagementSystem.repo.PatientRepository;
 import com.learn.jpa.HospitalManagementSystem.service.PatientService;
 import org.junit.jupiter.api.Test;

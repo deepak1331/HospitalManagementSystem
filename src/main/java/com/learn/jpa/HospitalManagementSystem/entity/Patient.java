@@ -8,14 +8,15 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
 @Getter
 @Setter
+@Builder
 @ToString
-@RequiredArgsConstructor
 @AllArgsConstructor
 @Table(name = "patient_tbl",
         uniqueConstraints = {
@@ -26,6 +27,7 @@ import java.util.List;
                 @Index(name = "idx_birthDate", columnList = "birthDate")
         }
 )
+@NoArgsConstructor
 public class Patient {
 
     @Id
@@ -45,24 +47,25 @@ public class Patient {
 
     @Column(length = 15, nullable = false)
     private String phoneNo;
-    
-//    @Column(length = 6, nullable = false)
-//    private String gender;
-//    @Column(length = 3)
-//    private String bloodGroup;
 
     @Enumerated(EnumType.ORDINAL)
     private BloodGroupType bloodGroup;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "patient_insurance_id") //Owning Side
     private Insurance insurance;
 
-    @OneToMany(mappedBy = "patient")
-    private List<Appointment> appointments;
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY,
+            cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @ToString.Exclude
+    private List<Appointment> appointments = new ArrayList<>();
 
     @CreationTimestamp
     @Column(updatable = false)
-    @ToString.Exclude
     private LocalDateTime createdOn;
+
+//    @Column(length = 6, nullable = false)
+//    private String gender;
+//    @Column(length = 3)
+//    private String bloodGroup;
 }
