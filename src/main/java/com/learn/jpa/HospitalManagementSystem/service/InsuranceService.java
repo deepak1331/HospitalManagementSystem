@@ -18,15 +18,41 @@ public class InsuranceService {
 
 
     @Transactional
-    public Patient attachInsuranceToPatient(Insurance insurance, Long patientId){
+    public Patient attachInsuranceToPatient(Insurance insurance, Long patientId) {
 
         Patient patient = patientRepository.findPatientById(patientId)
-                .orElseThrow(()->new EntityNotFoundException("No patient found with ID: "+patientId));
+                .orElseThrow(() -> new EntityNotFoundException("No patient found with ID: " + patientId));
 
         patient.setInsurance(insurance);
         insurance.setPatient(patient); //this is done to maintain Bi-directional mapping
 
         return patient;
     }
+
+    @Transactional
+    public Patient disassociateInsuranceFromPatient(Long patientId) {
+
+        Patient patient = patientRepository.findPatientById(patientId)
+                .orElseThrow(() -> new EntityNotFoundException("No patient found with ID: " + patientId));
+
+        patient.setInsurance(null); //this will remove Insurance reference from patient,
+        // and insurance will become an Orphan object
+        return patient;
+    }
+
+    @Transactional
+    public Patient updateInsuranceToPatient( Insurance newInsurance, Long patientId) {
+
+        Patient patient = patientRepository.findPatientById(patientId)
+                .orElseThrow(() -> new EntityNotFoundException("No patient found with ID: " + patientId));
+        if (patient.getInsurance() != null)
+            patient.setInsurance(null);  //removing reference to existing insurance
+
+        patient.setInsurance(newInsurance);
+        newInsurance.setPatient(patient); //this is done to maintain Bi-directional mapping
+
+        return patient;
+    }
+
 
 }

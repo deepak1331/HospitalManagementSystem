@@ -14,6 +14,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Doctor {
@@ -36,6 +38,7 @@ public class Doctor {
     private LocalDateTime createdOn;
 
     @OneToMany(mappedBy = "doctor")
+    //@ToString.Exclude
     private List<Appointment> appointments = new ArrayList<>();
 
     @ManyToMany(mappedBy = "doctors")

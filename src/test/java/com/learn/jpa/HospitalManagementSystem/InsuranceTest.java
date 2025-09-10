@@ -17,7 +17,7 @@ public class InsuranceTest {
     private InsuranceService insuranceService;
 
     @Test
-    public void testAttachInsuranceToPatient(){
+    public void testAttachInsuranceToPatient() {
 
         Insurance insurance = Insurance.builder()
                 .provider("TATA AIG")
@@ -28,8 +28,28 @@ public class InsuranceTest {
         Patient patient = insuranceService.attachInsuranceToPatient(insurance, 4L);
         System.out.println(patient);
 
+        Assert.notNull(patient,"Value not null");
+    }
+
+    @Test
+    public void testDisassociateInsuranceFromPatient() {
+
+        Patient patient = insuranceService.disassociateInsuranceFromPatient(4L);
+
+        System.out.println("After disassociation: " + patient);
+
         //Assert.notNull(patient,"Value not null");
     }
 
+    @Test
+    public void testUpdateInsuranceToPatient(){
+        Insurance insurance = Insurance.builder()
+                .provider("MAX Life")
+                .policyNumber("Max2025_12346")
+                .validUntil(LocalDate.now().plusYears(1))
+                .build();
 
+        Patient patient = insuranceService.updateInsuranceToPatient(insurance, 4L);
+        System.out.println("Insurance Updated: " + patient);
+    }
 }

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
+@Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Appointment {
@@ -31,10 +32,12 @@ public class Appointment {
     //Owning Side, since appointment doesn't exist without patient,
     //here appointment owns the relationship
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "patient_id", nullable = false) //patient is required and non nullable
     private Patient patient;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(nullable = false)
     private Doctor doctor;
 }

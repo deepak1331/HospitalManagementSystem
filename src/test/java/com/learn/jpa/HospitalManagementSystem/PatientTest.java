@@ -82,16 +82,17 @@ public class PatientTest {
 
     @Test
     public void testFindAllPatient() {
-        List<Patient> result = patientRepository.findAll();
+        List<Patient> result = patientRepository.findAllPatientWithAppointments();
+                //patientRepository.findAll();
         System.out.printf("No. of Patient : %d\n", result.size());
         result.forEach(System.out::println);
     }
 
     @Test
-    public void testFindAllPatientId() {
+    public void testFindByPatientId() {
         Long patientId = 3L;
         Patient patient;
-        patient = patientService.getPatientById(patientId);
+        patient = patientService.findById(patientId);
 
         System.out.printf("Patient with ID: %d Output: %s", patientId, patient);
     }

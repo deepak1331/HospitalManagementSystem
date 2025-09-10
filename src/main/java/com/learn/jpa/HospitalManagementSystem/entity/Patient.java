@@ -8,8 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -51,14 +51,14 @@ public class Patient {
     @Enumerated(EnumType.ORDINAL)
     private BloodGroupType bloodGroup;
 
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.ALL},  orphanRemoval = true)
+    //@OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "patient_insurance_id") //Owning Side
     private Insurance insurance;
 
-    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER,
             cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @ToString.Exclude
-    private List<Appointment> appointments = new ArrayList<>();
+    private Set<Appointment> appointments = new HashSet<>();
 
     @CreationTimestamp
     @Column(updatable = false)

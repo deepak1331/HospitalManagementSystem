@@ -6,6 +6,7 @@ import com.learn.jpa.HospitalManagementSystem.entity.Patient;
 import com.learn.jpa.HospitalManagementSystem.repo.AppointmentRepository;
 import com.learn.jpa.HospitalManagementSystem.repo.DoctorRepository;
 import com.learn.jpa.HospitalManagementSystem.repo.PatientRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +18,29 @@ public class AppointmentService {
     private final PatientRepository patientRepository;
     private final AppointmentRepository appointmentRepository;
 
-    public Appointment createNewAppointment(Appointment appointment, Long doctorId, Long patientId) {
+    @Transactional
+    public Appointment createNewAppointment(Appointment appointment, Long patientId, Long doctorId) {
         if (appointment.getId() != null)
             throw new IllegalArgumentException("Appointment shouldn't have ID");
 
-        Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
         Patient patient = patientRepository.findById(patientId).orElseThrow();
+        Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
 
-        appointment.setDoctor(doctor);
         appointment.setPatient(patient);
+        appointment.setDoctor(doctor);
 
         patient.getAppointments().add(appointment);
+        doctor.getAppointments().add(appointment);
 
         return appointmentRepository.save(appointment);
+    }
+
+    @Transactional
+    public Appointment reassignAppointment(Long appointmentId, Long doctorId){
+        Appointment appointment = appointmentRepository.findById(appointmentId).orElseThrow();
+        Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
+        appointment.setDoctor(doctor); //this will call for automatic update, since appointment got dirty
+        doctor.getAppointments().add(appointment); // for bidirectional mapping
+        return appointment;
     }
 }

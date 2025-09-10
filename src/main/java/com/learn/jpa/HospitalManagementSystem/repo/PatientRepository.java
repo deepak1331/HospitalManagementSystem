@@ -37,7 +37,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     List<Patient> findByBirthDateBetween(LocalDate startDate, LocalDate endDate);
 
-
+    /*********** JPQL Queries *************/
     @Query("SELECT p FROM Patient p where p.bloodGroup = ?1")
     List<Patient> findByBloodGroup(@Param("bloodGroup") BloodGroupType bloodGroup);
 
@@ -51,6 +51,10 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     @Query("SELECT new com.learn.jpa.HospitalManagementSystem.dto.BloodGroupCountResponseDTO(p.bloodGroup, count(*))" +
             " FROM Patient p group by p.bloodGroup")
     List<BloodGroupCountResponseDTO> findCountByBloodGroup2();
+
+    //@Query("SELECT p FROM Patient p LEFT JOIN p.appointments a LEFT JOIN FETCH a.doctor")
+    @Query("SELECT p FROM Patient p LEFT JOIN p.appointments")
+    List<Patient> findAllPatientWithAppointments();
 
     //native Query
     @Query(value = "SELECT * FROM patient_tbl p where p.id = :id", nativeQuery = true)

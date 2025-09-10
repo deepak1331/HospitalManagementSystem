@@ -33,6 +33,7 @@ public class Insurance {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdOn;
 
+    @ToString.Exclude
     @OneToOne(mappedBy = "insurance")  //Inverse Side for Bi-directional mapping
     private Patient patient;
 }
