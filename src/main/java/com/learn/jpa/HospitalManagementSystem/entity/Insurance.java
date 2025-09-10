@@ -13,13 +13,14 @@ import java.time.LocalDateTime;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Insurance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 15, unique = true)
+    @Column(nullable = false, length = 20, unique = true)
     private String policyNumber;
 
     @Column(nullable = false, length = 20)
@@ -34,5 +35,4 @@ public class Insurance {
 
     @OneToOne(mappedBy = "insurance")  //Inverse Side for Bi-directional mapping
     private Patient patient;
-
 }
