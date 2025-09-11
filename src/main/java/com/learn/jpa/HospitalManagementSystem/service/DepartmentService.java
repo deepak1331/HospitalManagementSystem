@@ -20,4 +20,8 @@ public class DepartmentService {
     public List<Department> saveAllDepartment(List<Department> department) {
         return repository.saveAll(department);
     }
+
+    public List<Department> fetchAllDepartments() {
+        return repository.findAll();
+    }
 }
