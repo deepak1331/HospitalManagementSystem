@@ -1,5 +1,6 @@
 package com.learn.jpa.HospitalManagementSystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,7 +34,8 @@ public class Insurance {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdOn;
 
-    @ToString.Exclude
+    //@ToString.Exclude
+    @JsonBackReference
     @OneToOne(mappedBy = "insurance")  //Inverse Side for Bi-directional mapping
     private Patient patient;
 }

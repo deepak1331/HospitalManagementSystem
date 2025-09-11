@@ -1,6 +1,7 @@
 package com.learn.jpa.HospitalManagementSystem.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -39,8 +40,10 @@ public class Doctor {
 
     @OneToMany(mappedBy = "doctor")
     //@ToString.Exclude
+    @JsonBackReference
     private List<Appointment> appointments = new ArrayList<>();
 
     @ManyToMany(mappedBy = "doctors")
+    @JsonBackReference
     private Set<Department> departments = new HashSet<>();
 }

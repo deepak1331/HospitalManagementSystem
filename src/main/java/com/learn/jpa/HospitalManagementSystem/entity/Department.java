@@ -1,8 +1,12 @@
 package com.learn.jpa.HospitalManagementSystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,6 +25,7 @@ public class Department {
     private String name;
 
     @OneToOne
+    @JsonManagedReference
     private Doctor headDoctor;
 
     @ManyToMany
@@ -29,5 +34,10 @@ public class Department {
             joinColumns = @JoinColumn(name = "dept_id"),
             inverseJoinColumns = @JoinColumn(name = "doctor_id")
     )
+    @JsonManagedReference
     private Set<Doctor> doctors = new HashSet<>();
+
+    @CreationTimestamp
+    @JsonIgnore
+    public LocalDateTime createdOn;
 }

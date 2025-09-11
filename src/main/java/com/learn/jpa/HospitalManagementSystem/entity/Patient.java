@@ -1,5 +1,6 @@
 package com.learn.jpa.HospitalManagementSystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.learn.jpa.HospitalManagementSystem.constant.BloodGroupType;
 import com.learn.jpa.HospitalManagementSystem.constant.Gender;
 import jakarta.persistence.*;
@@ -53,11 +54,12 @@ public class Patient {
 
     @OneToOne(cascade = {CascadeType.ALL},  orphanRemoval = true)
     //@OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "patient_insurance_id") //Owning Side
+    @JoinColumn(name = "patient_insurance_id")//Owning Side
     private Insurance insurance;
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER,
             cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonManagedReference
     private Set<Appointment> appointments = new HashSet<>();
 
     @CreationTimestamp

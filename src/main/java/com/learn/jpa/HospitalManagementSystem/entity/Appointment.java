@@ -1,5 +1,7 @@
 package com.learn.jpa.HospitalManagementSystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,12 +34,14 @@ public class Appointment {
     //Owning Side, since appointment doesn't exist without patient,
     //here appointment owns the relationship
     @ManyToOne
-    @ToString.Exclude
+    //@ToString.Exclude
     @JoinColumn(name = "patient_id", nullable = false) //patient is required and non nullable
+    @JsonBackReference
     private Patient patient;
 
     @ManyToOne
-    @ToString.Exclude
+    //@ToString.Exclude
     @JoinColumn(nullable = false)
+    @JsonManagedReference
     private Doctor doctor;
 }
