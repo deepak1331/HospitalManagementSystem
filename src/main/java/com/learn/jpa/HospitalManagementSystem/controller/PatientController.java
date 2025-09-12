@@ -1,6 +1,6 @@
 package com.learn.jpa.HospitalManagementSystem.controller;
 
-import com.learn.jpa.HospitalManagementSystem.entity.Patient;
+import com.learn.jpa.HospitalManagementSystem.dto.PatientResponseDTO;
 import com.learn.jpa.HospitalManagementSystem.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +19,12 @@ public class PatientController {
     private final PatientService patientService;
 
     @GetMapping
-    public ResponseEntity<List<Patient>> findAllPatient(){
+    public ResponseEntity<List<PatientResponseDTO>> findAllPatient(){
         return ResponseEntity.ok(patientService.findAllPatient());
     }
 
     @GetMapping(path = "/{patientId}")
-    public ResponseEntity<Patient> findPatientById(@PathVariable Long patientId){
+    public ResponseEntity<PatientResponseDTO> findPatientById(@PathVariable Long patientId){
         return ResponseEntity.ok(patientService.findById(patientId));
     }
 }
