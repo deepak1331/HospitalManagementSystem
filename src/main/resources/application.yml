@@ -7,15 +7,15 @@ spring:
   application:
     name: HospitalManagementSystem
 
-  security:
-    user:
-      name: deepak
-      password: admin
-      roles:
-        - ADMIN
-        - USER
-        - PATIENT
-        - DOCTOR
+#  security:
+#    user:
+#      name: deepak
+#      password: admin
+#      roles:
+#        - ADMIN
+#        - USER
+#        - PATIENT
+#        - DOCTOR
 
 #DB Configuration
   datasource:
