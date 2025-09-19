@@ -26,8 +26,8 @@ public class SecurityConfig {
         httpSecurity
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/public/**").permitAll()
-                        .requestMatchers("/admin/**").authenticated()
-                        .requestMatchers("/doctors/**").authenticated())
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/doctors/**").hasAnyRole("ADMIN", "DOCTOR"))
                 .formLogin(Customizer.withDefaults());
 
         return httpSecurity.build();
@@ -38,13 +38,13 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
 
         UserDetails user1 = User.withUsername("admin").password(passwordEncoder.encode("password"))
-                            .roles("ADMIN").build();
+                .roles("ADMIN").build();
 
         UserDetails user2 = User.withUsername("patient").password(passwordEncoder.encode("password"))
-                .roles("ADMIN").build();
+                .roles("PATIENT").build();
 
         UserDetails user3 = User.withUsername("doctor").password(passwordEncoder.encode("password"))
-                .roles("ADMIN").build();
+                .roles("DOCTOR").build();
 
         return new InMemoryUserDetailsManager(user1, user2, user3);
     }
