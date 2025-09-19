@@ -10,5 +10,5 @@ public class AppointmentResponseDTO{
     private LocalDateTime appointmentTime;
     private String reason;
     private DoctorResponseDTO doctor;
-//    private PatientResponseDto patient;
+    private PatientResponseDTO patient;
 }
