@@ -13,6 +13,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        //Following code will make override the default (all endpoints as authenticated,
+        // to all as public api now, although default password are still getting generated)
+        return httpSecurity.formLogin(Customizer.withDefaults()).build();
+    }
+
+
+    /*@Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/public/**").permitAll()
@@ -21,5 +29,5 @@ public class SecurityConfig {
                 .formLogin(Customizer.withDefaults());
 
         return httpSecurity.build();
-    }
+    }*/
 }
