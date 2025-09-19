@@ -1,6 +1,4 @@
-package com.learn.jpa.HospitalManagementSystem.constant;
-
-import lombok.Data;
+package com.learn.jpa.HospitalManagementSystem.entity.type;
 
 public enum BloodGroupType {
     A_POSITIVE("A+"),

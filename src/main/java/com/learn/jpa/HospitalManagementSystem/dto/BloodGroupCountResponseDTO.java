@@ -1,6 +1,6 @@
 package com.learn.jpa.HospitalManagementSystem.dto;
 
-import com.learn.jpa.HospitalManagementSystem.constant.BloodGroupType;
+import com.learn.jpa.HospitalManagementSystem.entity.type.BloodGroupType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

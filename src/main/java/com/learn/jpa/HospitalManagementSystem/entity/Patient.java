@@ -1,8 +1,8 @@
 package com.learn.jpa.HospitalManagementSystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.learn.jpa.HospitalManagementSystem.constant.BloodGroupType;
-import com.learn.jpa.HospitalManagementSystem.constant.Gender;
+import com.learn.jpa.HospitalManagementSystem.entity.type.BloodGroupType;
+import com.learn.jpa.HospitalManagementSystem.entity.type.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

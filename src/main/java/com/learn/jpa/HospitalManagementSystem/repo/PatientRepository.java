@@ -1,7 +1,7 @@
 package com.learn.jpa.HospitalManagementSystem.repo;
 
-import com.learn.jpa.HospitalManagementSystem.constant.BloodGroupType;
-import com.learn.jpa.HospitalManagementSystem.constant.Gender;
+import com.learn.jpa.HospitalManagementSystem.entity.type.BloodGroupType;
+import com.learn.jpa.HospitalManagementSystem.entity.type.Gender;
 import com.learn.jpa.HospitalManagementSystem.dto.BloodGroupCountResponseDTO;
 import com.learn.jpa.HospitalManagementSystem.entity.Patient;
 import jakarta.transaction.Transactional;
