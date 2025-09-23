@@ -27,17 +27,9 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @JoinColumn(nullable = false, unique = true)
     private String username;
     private String password;
-    private String providerId;
-
-    @Enumerated(EnumType.STRING)
-    private AuthProviderType providerType;
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    private Set<RoleType> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
