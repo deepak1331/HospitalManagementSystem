@@ -10,7 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class BloodGroupCountResponseDTO {
+public class BloodGroupCountResponseDto {
 
     private BloodGroupType bloodGroupType;
     private Long count;

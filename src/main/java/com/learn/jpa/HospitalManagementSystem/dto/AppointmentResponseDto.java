@@ -5,10 +5,10 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class AppointmentResponseDTO{
+public class AppointmentResponseDto {
     private Long id;
     private LocalDateTime appointmentTime;
     private String reason;
-    private DoctorResponseDTO doctor;
-    private PatientResponseDTO patient;
+    private DoctorResponseDto doctor;
+    private PatientResponseDto patient;
 }

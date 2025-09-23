@@ -7,7 +7,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class PatientResponseDTO {
+public class PatientResponseDto {
     private Long id;
     private String name;
     private String gender;
