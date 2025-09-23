@@ -1,7 +1,6 @@
 package com.learn.jpa.HospitalManagementSystem.controller;
 
-import com.learn.jpa.HospitalManagementSystem.dto.AppointmentResponseDTO;
-import com.learn.jpa.HospitalManagementSystem.entity.Appointment;
+import com.learn.jpa.HospitalManagementSystem.dto.AppointmentResponseDto;
 import com.learn.jpa.HospitalManagementSystem.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -22,7 +21,7 @@ public class DoctorController {
     private final ModelMapper modelMapper;
 
     @GetMapping(value = "/appointments/{doctorId}")
-    public ResponseEntity<List<AppointmentResponseDTO>> getAllAppointmentsOfDoctor(@PathVariable Long doctorId) {
+    public ResponseEntity<List<AppointmentResponseDto>> getAllAppointmentsOfDoctor(@PathVariable Long doctorId) {
         return ResponseEntity.ok(appointmentService.getAllAppointmentsOfDoctor(doctorId));
     }
 }

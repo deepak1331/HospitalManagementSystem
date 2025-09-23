@@ -2,7 +2,7 @@ package com.learn.jpa.HospitalManagementSystem;
 
 import com.learn.jpa.HospitalManagementSystem.entity.type.BloodGroupType;
 import com.learn.jpa.HospitalManagementSystem.entity.type.Gender;
-import com.learn.jpa.HospitalManagementSystem.dto.PatientResponseDTO;
+import com.learn.jpa.HospitalManagementSystem.dto.PatientResponseDto;
 import com.learn.jpa.HospitalManagementSystem.entity.Patient;
 import com.learn.jpa.HospitalManagementSystem.repo.PatientRepository;
 import com.learn.jpa.HospitalManagementSystem.service.PatientService;
@@ -92,7 +92,7 @@ public class PatientTest {
     @Test
     public void testFindByPatientId() {
         Long patientId = 3L;
-        PatientResponseDTO patient = patientService.findById(patientId);
+        PatientResponseDto patient = patientService.findById(patientId);
 
         System.out.printf("Patient with ID: %d Output: %s", patientId, patient);
     }
@@ -100,7 +100,7 @@ public class PatientTest {
     @Test
     public void testFindByName() {
         String patientName = "Deepak Yadav";
-        PatientResponseDTO patient = patientService.findByName(patientName);
+        PatientResponseDto patient = patientService.findByName(patientName);
         System.out.printf("PatientName: %s Output: %s", patientName, patient);
     }
 

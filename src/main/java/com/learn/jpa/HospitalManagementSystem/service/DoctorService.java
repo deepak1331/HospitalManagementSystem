@@ -1,6 +1,6 @@
 package com.learn.jpa.HospitalManagementSystem.service;
 
-import com.learn.jpa.HospitalManagementSystem.dto.DoctorResponseDTO;
+import com.learn.jpa.HospitalManagementSystem.dto.DoctorResponseDto;
 import com.learn.jpa.HospitalManagementSystem.entity.Doctor;
 import com.learn.jpa.HospitalManagementSystem.repo.DoctorRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,9 +29,9 @@ public class DoctorService {
         return doctorRepository.findById(doctorId);
     }
 
-    public List<DoctorResponseDTO> getAllDoctors(){
+    public List<DoctorResponseDto> getAllDoctors(){
                 return doctorRepository.findAll().stream()
-                .map(doctor -> modelMapper.map(doctor, DoctorResponseDTO.class))
+                .map(doctor -> modelMapper.map(doctor, DoctorResponseDto.class))
                 .toList();
     }
 }

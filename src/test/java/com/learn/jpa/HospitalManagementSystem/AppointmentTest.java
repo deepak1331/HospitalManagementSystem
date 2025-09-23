@@ -1,7 +1,7 @@
 package com.learn.jpa.HospitalManagementSystem;
 
-import com.learn.jpa.HospitalManagementSystem.dto.AppointmentResponseDTO;
-import com.learn.jpa.HospitalManagementSystem.dto.CreateAppointmentRequestDTO;
+import com.learn.jpa.HospitalManagementSystem.dto.AppointmentResponseDto;
+import com.learn.jpa.HospitalManagementSystem.dto.CreateAppointmentRequestDto;
 import com.learn.jpa.HospitalManagementSystem.entity.Appointment;
 import com.learn.jpa.HospitalManagementSystem.service.AppointmentService;
 import org.junit.jupiter.api.Test;
@@ -20,14 +20,14 @@ public class AppointmentTest {
     @Test
     public void testCreateAppointment(){
 
-        CreateAppointmentRequestDTO appointmentRequestDTO = CreateAppointmentRequestDTO.builder()
+        CreateAppointmentRequestDto appointmentRequestDTO = CreateAppointmentRequestDto.builder()
                 .doctorId(4L)
                 .patientId(4L)
                 .reason("Toothache")
                 .appointmentTime(LocalDateTime.of(2025, 9, 13, 18, 30))
                 .build();
 
-        AppointmentResponseDTO updatedAppointment = appointmentService.createNewAppointment(appointmentRequestDTO);
+        AppointmentResponseDto updatedAppointment = appointmentService.createNewAppointment(appointmentRequestDTO);
         System.out.printf("New Appointment Created : %s", updatedAppointment);
         Assert.notNull(updatedAppointment, "Appointment not null");
     }

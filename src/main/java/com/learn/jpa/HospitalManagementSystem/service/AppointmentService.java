@@ -1,7 +1,7 @@
 package com.learn.jpa.HospitalManagementSystem.service;
 
-import com.learn.jpa.HospitalManagementSystem.dto.AppointmentResponseDTO;
-import com.learn.jpa.HospitalManagementSystem.dto.CreateAppointmentRequestDTO;
+import com.learn.jpa.HospitalManagementSystem.dto.AppointmentResponseDto;
+import com.learn.jpa.HospitalManagementSystem.dto.CreateAppointmentRequestDto;
 import com.learn.jpa.HospitalManagementSystem.entity.Appointment;
 import com.learn.jpa.HospitalManagementSystem.entity.Doctor;
 import com.learn.jpa.HospitalManagementSystem.entity.Patient;
@@ -26,7 +26,7 @@ public class AppointmentService {
     private final ModelMapper modelMapper;
 
     @Transactional
-    public AppointmentResponseDTO createNewAppointment(CreateAppointmentRequestDTO createAppointmentRequestDto) {
+    public AppointmentResponseDto createNewAppointment(CreateAppointmentRequestDto createAppointmentRequestDto) {
 /*        if (appointment.getId() != null)
             throw new IllegalArgumentException("Appointment shouldn't have ID");*/
 
@@ -47,7 +47,7 @@ public class AppointmentService {
         patient.getAppointments().add(appointment);
         doctor.getAppointments().add(appointment);
 
-        return modelMapper.map(appointmentRepository.save(appointment), AppointmentResponseDTO.class);
+        return modelMapper.map(appointmentRepository.save(appointment), AppointmentResponseDto.class);
     }
 
     @Transactional
@@ -59,11 +59,11 @@ public class AppointmentService {
         return appointment;
     }
 
-    public List<AppointmentResponseDTO> getAllAppointmentsOfDoctor(Long doctorId) {
+    public List<AppointmentResponseDto> getAllAppointmentsOfDoctor(Long doctorId) {
 
         Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
         return doctor.getAppointments().stream()
                 .map(appointment ->
-                        modelMapper.map(appointment, AppointmentResponseDTO.class)).toList();
+                        modelMapper.map(appointment, AppointmentResponseDto.class)).toList();
     }
 }
